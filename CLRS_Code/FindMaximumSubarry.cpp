@@ -24,12 +24,11 @@ MaxSubArray find_max_subarray_SIMPLE(int *array, int low, int high)
 MaxSubArray find_max_cross_subarray(int *array, int low, int high)
 {
 
-    if (high <= low + 1) // there is only one element. 
+    if (low == high) // there is only one element. 
         return MaxSubArray(low, low, array[low]);
 
     int mid = (low + high) / 2;
-    //let left be 'mid -1' will ensure that there is one element during double side when the total amount is 2.
-    int left_max = INT32_MIN, left = mid - 1; 
+    int left_max = INT32_MIN, left = mid; 
     int sum = 0;
     for (int i = left; i >= low; --i)
     {
@@ -39,9 +38,9 @@ MaxSubArray find_max_cross_subarray(int *array, int low, int high)
             left = i;
         }
     }
-    int right_max = INT32_MIN, right = mid;
+    int right_max = INT32_MIN, right = mid + 1;
     sum = 0;
-    for (int i = right; i < high; i++)
+    for (int i = right; i <= high; i++)
     {
         sum += array[i];
         if (sum > right_max) {
@@ -55,14 +54,13 @@ MaxSubArray find_max_cross_subarray(int *array, int low, int high)
 //the result is an closed interval on double side.
 MaxSubArray find_max_subarry(int *array, int low, int high)
 {
-    //the condition can't be (low == high) because of it will be stackoverflow when at case (0,1)
-    if (high <= low + 1)    
+    if (low == high)    
         return MaxSubArray(low, low, array[low]);
     struct MaxSubArray left, cross, right;
     int mid = (low + high) / 2;
     cross = find_max_cross_subarray(array, low, high);
     left = find_max_subarry(array, low, mid);
-    right = find_max_subarry(array, mid, high);
+    right = find_max_subarry(array, mid+1, high);
     if (cross.value > left.value && cross.value > right.value)
         return cross;
     else if (left.value > right.value && left.value > cross.value)
@@ -75,7 +73,7 @@ MaxSubArray find_max_subarry(int *array, int low, int high)
 
 int main()
 {
-    const int len = 3;
+    const int len = 300;
     int array[len];
     std::srand(time(NULL));
     for (int i = 0; i < len; i++)
@@ -83,7 +81,7 @@ int main()
         array[i] = std::rand() * (std::rand() & 0x01 ? 1:-1);
     }
 
-    std::cout << find_max_subarray_SIMPLE(array, 0, len).tostring() << "   " << find_max_subarry(array, 0, len).tostring();
+    std::cout << find_max_subarray_SIMPLE(array, 0, len).tostring() << "   " << find_max_subarry(array, 0, len-1).tostring();
 
     return 0;
 }
