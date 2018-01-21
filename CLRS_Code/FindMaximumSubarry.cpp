@@ -2,6 +2,28 @@
 
 /*CLRS chapter 4.1*/
 
+typedef struct MaxSubArray {
+    int left;
+    int right;
+    int value;
+
+    MaxSubArray(int l, int r, int v) {
+        left = l;
+        right = r;
+        value = v;
+    }
+
+    MaxSubArray() {
+        left = INT32_MAX;
+        right = INT32_MIN;
+        value = INT32_MIN;
+    }
+
+    std::string tostring() {
+        return "[" + std::to_string(left) + ", " + std::to_string(right) + "] = " + std::to_string(value);
+    }
+} *pMaxSubArray;
+
 MaxSubArray find_max_subarray_SIMPLE(int *array, int low, int high)
 {
     int max = INT32_MIN, sum = 0, left,right;
@@ -69,10 +91,17 @@ MaxSubArray find_max_subarry(int *array, int low, int high)
         return right;
 }
 
-#if true
+
+#if false
 
 int main()
 {
+
+    int yy = -10 % 10;
+    yy = -789 % 10;
+    yy = -9 % 10;
+    yy = -1 % 10;
+
     const int len = 300;
     int array[len];
     std::srand(time(NULL));
