@@ -113,6 +113,7 @@
     <ClCompile Include="CommonInclude.h" />
     <ClCompile Include="FindMaximumSubarry.cpp" />
     <ClCompile Include="HeapSort.cpp" />
+    <ClCompile Include="QuickSort.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
