@@ -1,6 +1,6 @@
 #include "CommonInclude.h"
 
-#if 1
+#if 0
 
 
 int partion(int *array, int left, int right)

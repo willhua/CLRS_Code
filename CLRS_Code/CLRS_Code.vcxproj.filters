@@ -27,5 +27,8 @@
     <ClCompile Include="QuickSort.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CountingSort.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
